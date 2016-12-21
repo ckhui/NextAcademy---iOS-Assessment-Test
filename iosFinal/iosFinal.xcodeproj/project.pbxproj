@@ -23,6 +23,7 @@
 		A1FBEA991E0A298B000AFE6D /* CandidateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FBEA981E0A298B000AFE6D /* CandidateTableViewCell.swift */; };
 		A1FBEA9C1E0A29BF000AFE6D /* profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FBEA9B1E0A29BF000AFE6D /* profile.swift */; };
 		A1FBEA9F1E0A2AEF000AFE6D /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FBEA9E1E0A2AEF000AFE6D /* AppAction.swift */; };
+		A1FBEAA11E0A7D8C000AFE6D /* MatchedUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FBEAA01E0A7D8B000AFE6D /* MatchedUserTableViewCell.swift */; };
 		D274233CA999C0E82F0E7CA3 /* Pods_iosFinal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9792714654FB0B2444195D96 /* Pods_iosFinal.framework */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +48,7 @@
 		A1FBEA981E0A298B000AFE6D /* CandidateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CandidateTableViewCell.swift; path = view/CandidateTableViewCell.swift; sourceTree = "<group>"; };
 		A1FBEA9B1E0A29BF000AFE6D /* profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = profile.swift; sourceTree = "<group>"; };
 		A1FBEA9E1E0A2AEF000AFE6D /* AppAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
+		A1FBEAA01E0A7D8B000AFE6D /* MatchedUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchedUserTableViewCell.swift; sourceTree = "<group>"; };
 		A220CA1D0BD6F5656524D955 /* Pods-iosFinal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosFinal.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iosFinal/Pods-iosFinal.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				A1FBEA981E0A298B000AFE6D /* CandidateTableViewCell.swift */,
+				A1FBEAA01E0A7D8B000AFE6D /* MatchedUserTableViewCell.swift */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 				A1FBEA751E0A1D73000AFE6D /* AppDelegate.swift in Sources */,
 				A1FBEA7D1E0A1D74000AFE6D /* iosFinal.xcdatamodeld in Sources */,
 				A1FBEA9C1E0A29BF000AFE6D /* profile.swift in Sources */,
+				A1FBEAA11E0A7D8C000AFE6D /* MatchedUserTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

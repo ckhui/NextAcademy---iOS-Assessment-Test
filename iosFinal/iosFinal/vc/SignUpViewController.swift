@@ -17,6 +17,8 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var descriptionTextField: UITextField!
     
+    @IBOutlet weak var ageLabel: UITextField!
+    @IBOutlet weak var genderLabel: UITextField!
     
     @IBOutlet weak var cancleButton: UIButton! { didSet{
         cancleButton.addTarget(self, action: #selector(onCancelButtonTapped(button:)), for: .touchUpInside)    }}
@@ -33,12 +35,25 @@ class SignUpViewController: UIViewController {
     
     var frDBref: FIRDatabaseReference!
     
+    var savedUser : User?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        fullProfilImage = UIImage(named: "profile")
-        profileImagePreview.image = fullProfilImage
+        if let user = savedUser {
+            usernameTextField.text = user.name
+            emailTextField.isHidden = true
+            passwordTextField.isHidden = true
+            ageLabel.text = String(user.age)
+            genderLabel.text = user.gender.rawValue
+            descriptionTextField.text = user.description
+            createButton.setTitle("Update Account", for: .normal)
+            
+        } else {
+            fullProfilImage = UIImage(named: "profile")
+        }
         
+        profileImagePreview.image = fullProfilImage
         profileImagePreview.layer.borderWidth = 3.0
         profileImagePreview.layer.borderColor = UIColor.blue.cgColor
     }

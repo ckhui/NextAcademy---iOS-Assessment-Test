@@ -48,7 +48,8 @@ class ExploreViewController: UIViewController {
             
             DispatchQueue.main.async {
                 self.matchedUser.append(uid)
-                self.fetchMatchedUser()
+                self.users = []
+                self.fetchAllUserData()
             }
         })
         
