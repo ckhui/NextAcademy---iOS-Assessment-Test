@@ -27,7 +27,7 @@ class AppAction {
         return user.uid
     }
     
-    func changeProfilePicture(with image : UIImage) {
+    func changeProfilePicture(with image : UIImage, userUid : String) {
         
         guard let imageData = UIImageJPEGRepresentation(image, 0.5) else {
             UIViewController().warningPopUp(withTitle: "Image Type Error", withMessage: "Image Type Error")
@@ -49,7 +49,7 @@ class AppAction {
             }
             else {
                 let downloadURL = storageMeta!.downloadURL()?.absoluteString
-                let userUid = self.currentUserUid()
+                //let userUid = self.currentUserUid()
                 
                 let dbPath = "User/\(userUid)/"
                 self.modifyDatabase(path: dbPath, key: "picUrl", value: downloadURL!)

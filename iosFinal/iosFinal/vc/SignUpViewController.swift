@@ -36,6 +36,8 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        fullProfilImage = UIImage(named: "profile")
+        profileImagePreview.image = fullProfilImage
         
         profileImagePreview.layer.borderWidth = 3.0
         profileImagePreview.layer.borderColor = UIColor.blue.cgColor
@@ -89,7 +91,7 @@ class SignUpViewController: UIViewController {
             
             //upload profilePic to storage (if image exist)
             if let fullImg = self.fullProfilImage{
-                AppAction().changeProfilePicture(with: fullImg)
+                AppAction().changeProfilePicture(with: fullImg, userUid: currentUser.uid)
             }
             
             self.creatAccountSuccessfulPopUp(userName: self.usernameTextField.text, email: email)

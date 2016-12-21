@@ -26,7 +26,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        checkLoggedInUser()
+        checkLoggedInUser()
     }
 
     override func didReceiveMemoryWarning() {
