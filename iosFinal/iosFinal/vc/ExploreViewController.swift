@@ -97,17 +97,6 @@ class ExploreViewController: UIViewController {
     }
     
     
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }
 
 extension ExploreViewController : UITableViewDelegate, UITableViewDataSource{
@@ -137,6 +126,26 @@ extension ExploreViewController : UITableViewDelegate, UITableViewDataSource{
 extension ExploreViewController : CandidateTableViewCellDelegate {
     func didTapMatch(atCell cell: CandidateTableViewCell) {
         
+        guard let index = tableView.indexPath(for: cell)
+            else {
+                warningPopUp(withTitle: "Match Error", withMessage: "unable to get target uid")
+                return
+        }
+        let targetuid = filteredUsers[index.row].uid
+        AppAction().perform(actionWithType: .match, targetUid: targetuid)
+    }
+    
+    func didSwipeLeft(cell: CandidateTableViewCell) {
+        guard let index = tableView.indexPath(for: cell)
+            else {
+                warningPopUp(withTitle: "Match Error", withMessage: "unable to get target uid")
+                return
+        }
+        let targetuid = filteredUsers[index.row].uid
+        AppAction().perform(actionWithType: .unmatch, targetUid: targetuid)
+    }
+    
+    func didSwipeRight(cell: CandidateTableViewCell) {
         guard let index = tableView.indexPath(for: cell)
             else {
                 warningPopUp(withTitle: "Match Error", withMessage: "unable to get target uid")

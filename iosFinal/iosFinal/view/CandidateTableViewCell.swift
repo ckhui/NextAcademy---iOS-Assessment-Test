@@ -22,6 +22,9 @@ class CandidateTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
+        self.addGestureRecognizer(panGesture)
         // Initialization code
     }
 
@@ -34,9 +37,27 @@ class CandidateTableViewCell: UITableViewCell {
     func matchButtonPressed(){
         delegate?.didTapMatch(atCell: self)
     }
+    
+    @IBAction func handlePanGesture(_ gestureRecognizer: UIPanGestureRecognizer) {
+        if gestureRecognizer.state == .began {
+            gestureRecognizer.setTranslation(CGPoint.zero, in: self)
+        }
+        else if gestureRecognizer.state == .ended {
+            let translation = gestureRecognizer.translation(in: self)
+            //print(translation)
+            
+            if translation.x < -150 {
+                delegate?.didSwipeLeft(cell: self)
+            }else if translation.x > 150 {
+                delegate?.didSwipeRight(cell: self)
+            }
+        }
+    }
 
 }
 
 protocol CandidateTableViewCellDelegate {
     func didTapMatch(atCell cell: CandidateTableViewCell)
+    func didSwipeLeft(cell : CandidateTableViewCell)
+    func didSwipeRight(cell : CandidateTableViewCell)
 }

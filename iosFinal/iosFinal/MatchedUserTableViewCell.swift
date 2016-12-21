@@ -12,16 +12,16 @@ class MatchedUserTableViewCell: UITableViewCell {
 
     
     @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var unmatchButton: UIButton! {
-        didSet{
-            unmatchButton.addTarget(self, action: #selector(unmatchButtonPressed) , for: .touchUpInside)
-        }
-    }
     @IBOutlet weak var displayImageView: UIImageView!
     var delegate : MatchedUserTableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
+        self.addGestureRecognizer(panGesture)
+        
+        
         // Initialization code
     }
     
@@ -31,12 +31,22 @@ class MatchedUserTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func unmatchButtonPressed(){
-        delegate?.didTapUnmatch(atCell: self)
+    @IBAction func handlePanGesture(_ gestureRecognizer: UIPanGestureRecognizer) {
+        if gestureRecognizer.state == .began {
+            gestureRecognizer.setTranslation(CGPoint.zero, in: self)
+        }
+        else if gestureRecognizer.state == .ended {
+             let translation = gestureRecognizer.translation(in: self)
+            //print(translation)
+            
+            if translation.x < -150 {
+                delegate?.didSwipeLeft(cell: self)
+            }
+        }
     }
-    
 }
 
-protocol MatchedUserTableViewCellDelegate {
-    func didTapUnmatch(atCell cell: MatchedUserTableViewCell)
+protocol  MatchedUserTableViewCellDelegate {
+    func didSwipeLeft(cell : MatchedUserTableViewCell)
 }
+

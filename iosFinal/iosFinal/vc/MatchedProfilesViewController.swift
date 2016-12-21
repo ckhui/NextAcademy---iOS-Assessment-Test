@@ -91,15 +91,16 @@ class MatchedProfilesViewController: UIViewController {
         
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    var selectedUser = User()
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showMatchedProfile" {
+            let vc = segue.destination as! CandidateDetailViewController
+            vc.user = selectedUser
+            vc.isMatch = false
+        }
+        
+    }
     
 }
 
@@ -121,25 +122,32 @@ extension MatchedProfilesViewController : UITableViewDelegate, UITableViewDataSo
         
         cell.descriptionLabel.text = "\(user.name) \(user.age) \(user.gender) \n\(user.description!)"
         
-        
-        
         cell.delegate = self
         
         return cell
     }
     
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedUser = users[indexPath.row]
+        
+        performSegue(withIdentifier: "showMatchedProfile", sender: self)
+    }
 }
 
-extension MatchedProfilesViewController : MatchedUserTableViewCellDelegate{
-    func didTapUnmatch(atCell cell: MatchedUserTableViewCell) {
+
+extension MatchedProfilesViewController : MatchedUserTableViewCellDelegate {
+    func didSwipeLeft(cell: MatchedUserTableViewCell) {
+        
         guard let index = tableView.indexPath(for: cell)
             else {
-                warningPopUp(withTitle: "Unmatch Error", withMessage: "unable to get target uid")
+                warningPopUp(withTitle: "Match Error", withMessage: "unable to get target uid")
                 return
         }
         let targetuid = users[index.row].uid
         AppAction().perform(actionWithType: .unmatch, targetUid: targetuid)
     }
+    
 }
 
 
