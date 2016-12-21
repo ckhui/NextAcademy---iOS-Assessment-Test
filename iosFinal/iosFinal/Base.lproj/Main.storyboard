@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="iosFinal" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="BYZ-38-t0r" customClass="LoginViewController" customModule="iosFinal" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -56,10 +56,10 @@
             </objects>
             <point key="canvasLocation" x="-3823" y="1104"/>
         </scene>
-        <!--View Controller-->
+        <!--Sign Up View Controller-->
         <scene sceneID="TtN-qd-u3h">
             <objects>
-                <viewController id="pqy-i5-FoR" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUpViewController" id="pqy-i5-FoR" customClass="SignUpViewController" customModule="iosFinal" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hU5-C2-UFP"/>
                         <viewControllerLayoutGuide type="bottom" id="WjL-ea-Hr2"/>
@@ -140,7 +140,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="2jb-mg-W5z">
             <objects>
-                <tabBarController id="9w4-sQ-TMD" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" id="9w4-sQ-TMD" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="2We-7S-VQh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -159,7 +159,7 @@
         <!--Item-->
         <scene sceneID="fxI-Fx-6fF">
             <objects>
-                <viewController id="9lH-hs-zlR" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileViewController" id="9lH-hs-zlR" customClass="ProfileViewController" customModule="iosFinal" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FFJ-qY-fhr"/>
                         <viewControllerLayoutGuide type="bottom" id="Le0-AT-Pkz"/>
@@ -224,10 +224,10 @@
             </objects>
             <point key="canvasLocation" x="-2926" y="1808"/>
         </scene>
-        <!--View Controller-->
+        <!--Candidate Detail View Controller-->
         <scene sceneID="KI6-S8-N6q">
             <objects>
-                <viewController id="jGA-Fs-ff8" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CandidateDetailViewController" id="jGA-Fs-ff8" customClass="CandidateDetailViewController" customModule="iosFinal" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="YFo-w3-Yjl"/>
                         <viewControllerLayoutGuide type="bottom" id="1Er-Ic-ogQ"/>
@@ -289,7 +289,7 @@
         <!--Item-->
         <scene sceneID="nUm-oW-xnU">
             <objects>
-                <viewController id="c8n-Pp-4tE" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ExploreViewController" id="c8n-Pp-4tE" customClass="ExploreViewController" customModule="iosFinal" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qBD-di-ud5"/>
                         <viewControllerLayoutGuide type="bottom" id="RdP-y2-CWt"/>
@@ -353,7 +353,7 @@
         <!--Item-->
         <scene sceneID="xB1-jG-rYC">
             <objects>
-                <viewController id="EFy-Ne-lUJ" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MatchedProfilesViewController" id="EFy-Ne-lUJ" customClass="MatchedProfilesViewController" customModule="iosFinal" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mqW-kV-fOL"/>
                         <viewControllerLayoutGuide type="bottom" id="mRx-PX-FNT"/>
@@ -409,7 +409,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="C4j-aj-ckK"/>
+        <segue reference="UXt-YG-DN6"/>
         <segue reference="0vR-y1-1Ri"/>
     </inferredMetricsTieBreakers>
 </document>
