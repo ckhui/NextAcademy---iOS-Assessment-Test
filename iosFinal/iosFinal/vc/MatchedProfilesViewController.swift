@@ -97,7 +97,7 @@ class MatchedProfilesViewController: UIViewController {
         if segue.identifier == "showMatchedProfile" {
             let vc = segue.destination as! CandidateDetailViewController
             vc.user = selectedUser
-            vc.isMatch = false
+            vc.isMatch = true
         }
         
     }
