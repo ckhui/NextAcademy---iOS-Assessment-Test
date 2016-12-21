@@ -70,17 +70,72 @@ class AppAction {
         frDBref.child("\(path)/\(key)").setValue(value)
     }
     
+    func deleteFromDatabase(path: String, item : String){
+        frDBref.child("\(path)/").child(item).removeValue()
+    }
+    
+    func prepareProfileDictionary(name : String, age : Int,  gender : genderType, desc : String) -> [String : String]{
+        var dict = [String : String]()
+        dict["name"] = name
+        dict["age"] = String(age)
+        dict["desc"] = desc
+        
+        var tempGender = ""
+        switch gender {
+        case .male:
+            tempGender = "m"
+            break
+        case .female:
+            tempGender = "f"
+            break
+        default:
+            tempGender = "u"
+        }
+        
+        dict["gender"] = tempGender
+        
+        return dict
+    }
+    
     
     enum actionType {
         case match
         case unmatch
-        case updateProfile
-        case createAccount
+        case updateProfileInfo
+        case updateProfilePic
         
     }
     
-    func perform(actionWithType type : actionType, targetUid : String = nil, dict : [String : String] = [:]) {
+    func perform(actionWithType type : actionType, targetUid : String?, dict : [String : String] = [:]) {
         
+        let userUid = self.currentUserUid()
+        var path = ""
+        
+        switch type {
+        case .match:
+            guard let target = targetUid
+                else {
+                    break
+            }
+            path = "Match/\(userUid)/"
+            self.modifyDatabase(path: path, key: target, value: "true")
+            break
+            
+        case .unmatch:
+            guard let target = targetUid
+                else {
+                    break
+            }
+            path = "Match/\(userUid)/"
+            self.deleteFromDatabase(path: path, item: target)
+            break
+            
+            
+        case .updateProfileInfo:
+            path = "User/\(userUid)/info/"
+            self.modifyDatabase(path: path, dictionary: dict)
+            break
+        }
     }
     
 }
