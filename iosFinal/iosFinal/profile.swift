@@ -41,7 +41,7 @@ class User {
     }
 }
 
-enum genderType{
+enum genderType : String{
     case male
     case female
     case none

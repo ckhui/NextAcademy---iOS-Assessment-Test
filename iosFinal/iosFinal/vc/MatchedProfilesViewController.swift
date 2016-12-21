@@ -7,12 +7,29 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
+
+
 
 class MatchedProfilesViewController: UIViewController {
 
+    var matchedUser = [String]()
+    var users = [User]()
+    
+    var ref: FIRDatabaseReference!
+    
+    @IBOutlet weak var tableView: UITableView!{
+        didSet{
+            tableView.delegate = self
+            tableView.dataSource = self
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        ref = FIRDatabase.database().reference()
+        fetchMatchedUser()
         // Do any additional setup after loading the view.
     }
 
@@ -20,6 +37,20 @@ class MatchedProfilesViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func fetchMatchedUser(){
+        let uid = AppAction().currentUserUid()
+        ref.child("Match").child(uid).observe(.value, with: {(snapshot) in
+            
+            self.matchedUser = (snapshot.value as? NSDictionary)?.allKeys as? [String] ?? []
+            
+            DispatchQueue.main.async {
+                //self.displayAllUserData()
+            }
+        })
+        
+    }
+    
     
 
     /*
