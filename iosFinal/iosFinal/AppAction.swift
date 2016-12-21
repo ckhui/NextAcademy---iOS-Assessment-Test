@@ -102,8 +102,6 @@ class AppAction {
         case match
         case unmatch
         case updateProfileInfo
-        case updateProfilePic
-        
     }
     
     func perform(actionWithType type : actionType, targetUid : String?, dict : [String : String] = [:]) {
