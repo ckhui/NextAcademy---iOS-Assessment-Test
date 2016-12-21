@@ -32,6 +32,11 @@ class ProfileViewController: UIViewController {
         fetchUserData()
         // Do any additional setup after loading the view.
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        fetchUserData()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

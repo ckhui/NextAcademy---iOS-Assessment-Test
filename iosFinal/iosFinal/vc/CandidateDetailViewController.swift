@@ -11,7 +11,7 @@ import UIKit
 class CandidateDetailViewController: UIViewController {
     
     var user : User?
-    var isMatch = false
+    var isMatch = true
     
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
