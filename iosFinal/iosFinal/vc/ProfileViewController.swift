@@ -82,6 +82,7 @@ class ProfileViewController: UIViewController {
         if segue.identifier == "editProfileSegue" {
             let vc = segue.destination as! SignUpViewController
             vc.savedUser = user
+            vc.fullProfilImage = profileIamgeView.image
         }
     }
  

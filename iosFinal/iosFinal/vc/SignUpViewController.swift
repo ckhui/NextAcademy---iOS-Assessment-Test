@@ -11,7 +11,7 @@ import FirebaseAuth
 import FirebaseDatabase
 
 class SignUpViewController: UIViewController {
-
+    
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -30,7 +30,7 @@ class SignUpViewController: UIViewController {
         createButton.addTarget(self, action: #selector(onCreateUserPressed(button:)), for: .touchUpInside)    }}
     
     @IBOutlet weak var profileImagePreview: UIImageView!
-
+    
     var fullProfilImage : UIImage?
     
     var frDBref: FIRDatabaseReference!
@@ -39,7 +39,7 @@ class SignUpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         if let user = savedUser {
             usernameTextField.text = user.name
             emailTextField.isHidden = true
@@ -57,7 +57,7 @@ class SignUpViewController: UIViewController {
         profileImagePreview.layer.borderWidth = 3.0
         profileImagePreview.layer.borderColor = UIColor.blue.cgColor
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -73,49 +73,71 @@ class SignUpViewController: UIViewController {
             return
         }
         
+        let age = ageLabel.text ?? ""
+        let gender = genderLabel.text ?? ""
         
-        let email = emailTextField.text ?? ""
-        let password = passwordTextField.text ?? ""
-        
-        if email == "" || password == ""{
-            warningPopUp(withTitle: "input error", withMessage: "empty email or password")
+        guard let ageNumber = Int(age)
+            else {
+                warningPopUp(withTitle: "input error", withMessage: "invalid age")
+                return
+        }
+        if gender != "male"  && gender != "female" {
+            warningPopUp(withTitle: "input error", withMessage: "gender only allow: male/fe")
             return
         }
         
+        //let path = "User/\(currentUser.uid)"
+        let desc = self.descriptionTextField.text ?? ""
+        var sex = genderType.none
+        if gender == "male"{
+            sex = .male
+        }else if gender == "female" {
+            sex = .female
+        }
+        let tempDict = AppAction().prepareProfileDictionary(name: username, age: ageNumber, gender: sex , desc: desc)
+        AppAction().perform(actionWithType: .updateProfileInfo, targetUid: nil, dict: tempDict)
         
-        FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
+        if savedUser == nil {
             
-            //TODO: if email ald exist
-            if let createAccountError = error {
-                print("Creat Account error : \(createAccountError)")
-                self.warningPopUp(withTitle: "Creat Account error ", withMessage: "\(createAccountError)")
+            let email = emailTextField.text ?? ""
+            let password = passwordTextField.text ?? ""
+            
+            if email == "" || password == ""{
+                warningPopUp(withTitle: "input error", withMessage: "empty email or password")
                 return
             }
             
-            guard let currentUser = user else{
-                print ("impossible current user not found error")
-                return
+            
+            
+            FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
+                
+                //TODO: if email ald exist
+                if let createAccountError = error {
+                    print("Creat Account error : \(createAccountError)")
+                    self.warningPopUp(withTitle: "Creat Account error ", withMessage: "\(createAccountError)")
+                    return
+                }
+                
+                guard let currentUser = user else{
+                    print ("impossible current user not found error")
+                    return
+                }
+                
+                //creat account
+                
+                //upload profilePic to storage (if image exist)
+                if let fullImg = self.fullProfilImage{
+                    AppAction().changeProfilePicture(with: fullImg, userUid: currentUser.uid)
+                }
+                
+                self.creatAccountSuccessfulPopUp(userName: self.usernameTextField.text, email: email)
+                
+                //avoid logged in directly after account successfully created
+                try! FIRAuth.auth()!.signOut()
+                
+                //TODO: Done creat user go to login page and fill the email
+                
             }
-            
-            //creat account
-            //let path = "User/\(currentUser.uid)"
-            let desc = self.descriptionTextField.text ?? ""
-            let tempDict = AppAction().prepareProfileDictionary(name: username, age: 30, gender: .male , desc: desc)
-
-            AppAction().perform(actionWithType: .updateProfileInfo, targetUid: nil, dict: tempDict)
-            
-            //upload profilePic to storage (if image exist)
-            if let fullImg = self.fullProfilImage{
-                AppAction().changeProfilePicture(with: fullImg, userUid: currentUser.uid)
-            }
-            
-            self.creatAccountSuccessfulPopUp(userName: self.usernameTextField.text, email: email)
-            
-            //avoid logged in directly after account successfully created
-            try! FIRAuth.auth()!.signOut()
-            
-            //TODO: Done creat user go to login page and fill the email
-            
         }
         
         print("created process done")
@@ -143,13 +165,13 @@ class SignUpViewController: UIViewController {
         performSegue(withIdentifier: "signInToSelectPhoto", sender: self)
     }
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

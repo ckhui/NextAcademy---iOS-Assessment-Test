@@ -79,20 +79,7 @@ class AppAction {
         dict["name"] = name
         dict["age"] = String(age)
         dict["desc"] = desc
-        
-        var tempGender = ""
-        switch gender {
-        case .male:
-            tempGender = "m"
-            break
-        case .female:
-            tempGender = "f"
-            break
-        default:
-            tempGender = "u"
-        }
-        
-        dict["gender"] = tempGender
+        dict["gender"] = gender.rawValue
         
         return dict
     }
